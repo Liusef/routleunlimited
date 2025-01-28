@@ -2,7 +2,7 @@
 import { Route} from "@/lib/types/transitland";
 import dynamic from "next/dynamic";
 import { centerOfMass } from "@turf/center-of-mass";
-import { useEffect, useState} from "react";
+import {Suspense, useEffect, useState} from "react";
 import {cleanCoords} from "@turf/clean-coords";
 import {GeoJSON} from "react-leaflet";
 import { bbox } from "@turf/bbox";
@@ -58,7 +58,7 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
 
         console.log(boundbox)
 
-    }, [guesses, boundbox, routegeojson, routes, currentRoute.onestop_id]);
+    }, [guesses]);
 
 
 
@@ -73,8 +73,10 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
     return (
         <div className={'bg-zinc-900 w-screen h-screen'}>
             <div className={'w-full h-3/5'}>
+                <Suspense>
                 {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                 {/* @ts-expect-error */}
+
                 <Map bounds={boundbox}
                     lat={centerOfRoute.geometry.coordinates[1]}
                     lng={centerOfRoute.geometry.coordinates[0]}
@@ -103,6 +105,7 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                     })}
 
                 </Map>
+                </Suspense>
             </div>
             {/* Guesses and Route Options Section */}
             <div className={'w-full h-2/5 absolute bg-zinc-900 z-20 bottom-0 border-t border-white'}>
