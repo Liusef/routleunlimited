@@ -196,7 +196,38 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
 
                         <Button
                             onClick={() => {
-                                const text = `${currentRoute.agency.agency_name} Routle ${new Date().toLocaleDateString()}\n${guesses.map(guess => guess === currentRoute.onestop_id ? '🟩' : '🟥').join(' ')}\n\nhttps://routleunlimited.com/play/${currentRoute.agency.onestop_id}`
+
+                                /*
+                                Muni Routle 01/28/2025
+                                 🟩 ⬛ ⬛ ⬛ ⬛
+                                 */
+
+                                /**
+                                 * emojis work like this:
+                                 *  🟩 = correct
+                                 *  🟥 = incorrect
+                                 *  ⬛ = not guessed (usually if the person guesses the route in under 5 guesses, we use this to fill in the rest of the guesses)
+                                 *  the guesses array may not be 5 long, so we need to fill in the rest of the guesses with ⬛ if the user guesses the route in under 5 guesses
+                                 *
+                                 * examples:
+                                 *
+                                 *  🟥 🟥 🟥 🟥🟩
+                                 *  🟩⬛⬛⬛⬛
+                                 *  🟥🟥🟩⬛⬛
+                                 */
+
+                                let emojiString = ''
+                                guesses.forEach((guess) => {
+                                    if (guess === currentRoute.onestop_id) {
+                                        emojiString += '🟩'
+                                    } else {
+                                        emojiString += '🟥'
+                                    }
+                                })
+                                for (let i = guesses.length; i < 5; i++) {
+                                    emojiString += '⬛'
+                                }
+                                const text = `${currentRoute.agency.agency_name} Routle ${new Date().toLocaleDateString()}\n${emojiString}\n\nhttps://routleunlimited.com/play/${currentRoute.agency.onestop_id}`
                                 try {
                                     navigator.share({text: text})
                                 } catch (e: unknown) {
