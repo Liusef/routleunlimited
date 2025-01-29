@@ -64,6 +64,62 @@ export async function generateMetadata({params}: { params: Promise<{ agency_ones
     }
 }
 
+function sortRoutes(routes: Route[]) {
+    const numNum: Route[] = [];
+    const letterLetter: Route[] = [];
+    const numLetter: Route[] = [];
+
+    routes.forEach(route => {
+        const str = route.route_short_name || route.route_long_name || '';
+        if (!str) return; // Skip if empty
+
+        const firstChar = str.charAt(0);
+        const lastChar = str.charAt(str.length - 1);
+        const isFirstNum = firstChar >= '0' && firstChar <= '9';
+        const isLastNum = lastChar >= '0' && lastChar <= '9';
+
+        if (isFirstNum && isLastNum) {
+            numNum.push(route);
+        } else if (!isFirstNum && !isLastNum) {
+            letterLetter.push(route);
+        } else if (isFirstNum && !isLastNum) {
+            numLetter.push(route);
+        } else {
+            throw new Error(`Unexpected category {letter, number} for: ${str}`);
+        }
+    });
+
+    // Sorting logic
+    numNum.sort((a, b) => {
+        const aStr = a.route_short_name || a.route_long_name || '';
+        const bStr = b.route_short_name || b.route_long_name || '';
+        return Number(aStr) - Number(bStr);
+    });
+
+    letterLetter.sort((a, b) => {
+        const aStr = a.route_short_name || a.route_long_name || '';
+        const bStr = b.route_short_name || b.route_long_name || '';
+        return aStr.localeCompare(bStr);
+    });
+
+    numLetter.sort((a, b) => {
+        const aStr: string = a.route_short_name || a.route_long_name || '';
+        const bStr: string = b.route_short_name || b.route_long_name || '';
+
+        // Primary sort: numeric part
+        const numA = parseInt(aStr, 10);
+        const numB = parseInt(bStr, 10);
+        if (numA !== numB) return numA - numB;
+
+        // Secondary sort: alphabetical comparison
+        return aStr.localeCompare(bStr);
+    });
+
+    // Return sorted array
+    return [...numNum, ...numLetter, ...letterLetter];
+}
+
+
 export default async function Page({params}: { params: Promise<{ agency_onestop: string }>}) {
     const { agency_onestop } = await params
     console.log(agency_onestop)
@@ -130,7 +186,9 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
 
     // get route from json
     const currentRoute = json.routes.find(route => route.onestop_id === route_id) as Route
-    const otherRoutes = json.routes as Route[]
+    const otherRoutes = sortRoutes(json.routes as Route[]) as Route[]
+
+
 
     return (
         <div className={'text-center w-full h-full'}>

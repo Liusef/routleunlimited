@@ -1,6 +1,6 @@
 'use client'
 import { LoginLink, LogoutLink} from "@kinde-oss/kinde-auth-nextjs/components";
-import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs"
+import { useKindeBrowserClient, KindeProvider } from "@kinde-oss/kinde-auth-nextjs";
 import {Button} from "@/components/ui/button";
 import {Skeleton} from "@/components/ui/skeleton";
 import {usePathname} from "next/navigation";
@@ -14,6 +14,7 @@ import {
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {ChevronRightIcon, CircleX, Loader2} from "lucide-react";
 import {useEffect, useState} from "react";
+import Link from "next/link";
 
 //////////////
 
@@ -23,6 +24,11 @@ const orgCode = 'org_c7b8d71661610'
 
 
 //////////////
+
+
+export const AuthProvider = ({children}: {children: React.ReactNode}) => {
+    return <KindeProvider>{children}</KindeProvider>;
+};
 
 export function SignInButton() {
     const pathname = usePathname()
@@ -112,7 +118,13 @@ export function Profile() {
             <DropdownMenuLabel>{user?.given_name} {user?.family_name}</DropdownMenuLabel>
             <DropdownMenuLabel>{user?.email}</DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <Link href={'/settings'}>
+            <DropdownMenuItem>
+
+                    Settings
+
+            </DropdownMenuItem>
+            </Link>
             <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
             <LogoutLink>
@@ -133,7 +145,7 @@ export function ProfilePic() {
         isAuthenticated
     } = useKindeBrowserClient();
 
-    if (isLoading) {
+    if (isLoading && !user) {
         return (
             <div>
                 <Skeleton className="flex rounded-full w-12 h-12"/>
