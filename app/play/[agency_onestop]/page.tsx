@@ -153,7 +153,8 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
     // if it doesn't exist, get a random route from the json and save it in kv
 
 
-    let route_id = await kv.get(`dailyroute:${agency_onestop}`)
+    let route_id = await kv.get(`dailyroute:${agency_onestop}`, { type: 'text' })
+    console.log(route_id)
     if (!route_id) {
         //eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
