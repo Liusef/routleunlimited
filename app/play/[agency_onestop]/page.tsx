@@ -153,7 +153,7 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
     // if it doesn't exist, get a random route from the json and save it in kv
 
 
-    let route_id = null //await kv.get(`dailyroute:${agency_onestop}`)
+    let route_id = await kv.get(`dailyroute:${agency_onestop}`)
     if (!route_id) {
         //eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -166,21 +166,20 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
 
 
 
-        /*
         // day count
 
-        let daycount = await kv.get(`daycount:${agency_onestop}`)
+        //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-expect-error
+        let daycount: string | null = await kv.get(`daycount:${agency_onestop}`)
 
         if (!daycount) {
-            daycount = 1
+            daycount = '1'
         } else {
-            daycount += 1
+            daycount = parseInt(daycount) + 1 + ''
         }
 
-        await kv.put(`daycount:${agency_onestop}`, daycount)
+        await kv.put(`daycount:${agency_onestop}`, `${daycount}`)
 
-
-        */
     }
 
     console.log()
