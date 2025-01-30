@@ -171,8 +171,6 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
 
         // day count
 
-        //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-expect-error
         let daycount: string | null = await kv.get(`daycount:${agency_onestop}`)
 
         if (!daycount) {
