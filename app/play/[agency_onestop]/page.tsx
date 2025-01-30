@@ -17,17 +17,19 @@ import * as octa from '@/lib/transit/o-9mu-orangecountytransportationauthority.j
 import * as cota from '@/lib/transit/o-dphg-centralohiotransitauthority.json'
 import * as kingc from '@/lib/transit/o-c23-metrotransit.json'
 import * as trimet from '@/lib/transit/o-c20-trimet.json'
+import * as vta from "@/lib/transit/o-9q9-vta.json";
 
 const agencyMap: Record<string, RoutesResponse> = {
     'o-9q8-samtrans': samtrans,
     'o-9q8y-sfmta': sfmta,
     'o-9q9-actransit': actransit,
     'o-9q9q-wheelsbus': wheels,
+    'o-9q9-vta': vta,
     'o-9mu-mts': mts,
     'o-9mu-orangecountytransportationauthority': octa,
     'o-dphg-centralohiotransitauthority': cota,
     'o-c23-metrotransit': kingc,
-    'o-c20-trimet': trimet
+    'o-c20-trimet': trimet,
 }
 
 
