@@ -68,6 +68,7 @@ function sortRoutes(routes: Route[]) {
     const numNum: Route[] = [];
     const letterLetter: Route[] = [];
     const numLetter: Route[] = [];
+    const irregular: Route[] = [];
 
     routes.forEach(route => {
         const str = route.route_short_name || route.route_long_name || '';
@@ -85,7 +86,7 @@ function sortRoutes(routes: Route[]) {
         } else if (isFirstNum && !isLastNum) {
             numLetter.push(route);
         } else {
-            throw new Error(`Unexpected category {letter, number} for: ${str}`);
+            irregular.push(route);
         }
     });
 
@@ -116,7 +117,7 @@ function sortRoutes(routes: Route[]) {
     });
 
     // Return sorted array
-    return [...numNum, ...numLetter, ...letterLetter];
+    return [...numNum, ...numLetter, ...letterLetter, ...irregular];
 }
 
 
