@@ -109,7 +109,7 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                         return (<GeoJSON key={index} data={cleanCoords(guessRoute.geometry)} onEachFeature={(feature, layer) => {
                                 layer.setStyle(
                                     {
-                                        color: 'red',
+                                        color: guessRoute.onestop_id === currentRoute.onestop_id ? 'hsl(120, 100%, 50%)' : 'hsl(0, 100%, 50%)',
                                     })
                             }}
                             />
@@ -168,39 +168,56 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                 </div>
 
                 {/* Scrollable Route List */}
-                <ScrollArea className="w-full h-4/5">
-                    <div className="grid grid-cols-4 gap-4 p-4 overflow-y-auto">
-                        {routes.map((route, index ) => {
-                            //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                            //@ts-expect-error
-                            if (guesses.includes(route.onestop_id)) {
-                                return null;
-                            }
+                {!fin && (
+                    <ScrollArea className="w-full h-4/5">
+                        <div className="grid grid-cols-4 gap-4 p-4 overflow-y-auto">
+                            {routes.map((route, index ) => {
+                                //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                //@ts-expect-error
+                                if (guesses.includes(route.onestop_id)) {
+                                    return null;
+                                }
 
-                            //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                            //@ts-expect-error
-                            return (<Button key={`${route.onestop_id}-${index}`} variant={guesses.includes(route.onestop_id)
-                                            ? route.onestop_id === currentRoute.onestop_id
-                                                ? 'secondary'
-                                                : 'destructive'
-                                            : 'default'
+                                //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                //@ts-expect-error
+                                return (<Button key={`${route.onestop_id}-${index}`} variant={guesses.includes(route.onestop_id)
+                                        ? route.onestop_id === currentRoute.onestop_id
+                                            ? 'secondary'
+                                            : 'destructive'
+                                        : 'default'
                                     }
-                                    onClick={() => {
-                                        if (route.onestop_id === currentRoute.onestop_id) {
-                                            setFin(true);
-                                        }
-                                        //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                                        //@ts-expect-error
-                                        setGuesses([...guesses, route.onestop_id]);
-                                    }}
-                                    disabled={fin}
-                                >
-                                    {route.route_short_name}
-                                </Button>
-                            );
-                        })}
+                                                onClick={() => {
+                                                    if (route.onestop_id === currentRoute.onestop_id) {
+                                                        setFin(true);
+                                                    }
+                                                    //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                                                    //@ts-expect-error
+                                                    setGuesses([...guesses, route.onestop_id]);
+                                                }}
+                                                disabled={fin}
+                                    >
+                                        {route.route_short_name}
+                                    </Button>
+                                );
+                            })}
+                        </div>
+                    </ScrollArea>
+                )}
+                {fin && (
+                    <div className="w-full h-4/5 flex justify-center items-center">
+                        <Button
+                            onClick={() => {
+                                setModal(true)
+                            }}
+                            className={'w-1/2 bg-primary text-primary-foreground'}
+                        >
+                            Finish
+                        </Button>
                     </div>
-                </ScrollArea>
+                )}
+
+
+
             </div>
             <Dialog open={modal}>
                 <DialogContent>
