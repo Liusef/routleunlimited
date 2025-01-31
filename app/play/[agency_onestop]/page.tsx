@@ -6,6 +6,7 @@ export const runtime = 'edge';
 import { KVNamespace } from '@cloudflare/workers-types'
 import Game from "@/app/play/[agency_onestop]/game";
 import {Route, RoutesResponse} from "@/lib/types/transitland";
+import {beutifyAgencyName} from "@/lib/utils";
 
 
 import * as samtrans from '@/lib/transit/o-9q8-samtrans.json'
@@ -41,28 +42,53 @@ export async function generateMetadata({params}: { params: Promise<{ agency_ones
     // get agency name from a route
     const json = agencyMap[agency_onestop] as RoutesResponse
 
-    let agency_name = json.routes[0].agency.agency_name
+    const agency_name = beutifyAgencyName(json.routes[0].agency.agency_name)
 
-    // clean up
-    if (agency_name === 'San Francisco Municipal Transportation Agency') {
-        agency_name = 'SFMTA'
-    }
-    if (agency_name === 'AC TRANSIT') {
-        agency_name = 'AC Transit'
-    }
-    if (agency_name === 'Livermore Amador Valley Transit Authority') {
-        agency_name = 'Wheels'
-    }
-    if (agency_name === 'Metro Transit') {
-        agency_name = 'King County Metro'
-    }
+
 
 
     console.log(json.routes[0].agency)
+    const title = `Routle Unlimited - ${agency_name}`
+    const description = `Test your knowledge of ${agency_name}`
 
     return {
-        title: `${agency_name} Routle`,
-        description: `Test your knowledge of ${agency_name} transit routes`,
+        title: title,
+        description:description,
+        openGraph: {
+            title: title,
+            description: description,
+            url: "https://routleunlimited.com/play/" + agency_onestop,
+            type: "website",
+            locale: "en_US",
+            siteName: "Routle Unlimited - " + agency_name,
+        },
+        twitter: {
+            card: 'summary',
+            title: title,
+            description: description,
+            siteId: '1467726470533754880',
+            creator: '@duckdoquack',
+        },
+        icons: {
+            icon: "/favicons/apple-touch-icon.png",
+            shortcut: "/favicons/favicon-16x16.png",
+            apple: "/favicons/apple-touch-icon.png",
+        },
+        category: 'technology',
+        keywords: [
+            "routle",
+            "trivia",
+            "transit trivia",
+            "transit",
+            "transportation",
+            "transportation trivia",
+            "public transportation",
+            "public transportation trivia",
+            `${agency_name} trivia`,
+            `${agency_name}`,
+            `${agency_name} route trivia`,
+            `${agency_name} routes`
+        ],
     }
 }
 

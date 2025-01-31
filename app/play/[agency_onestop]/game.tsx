@@ -9,7 +9,7 @@ import { bbox } from "@turf/bbox";
 import { combine } from "@turf/combine";
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {Button} from "@/components/ui/button";
-import {cn} from "@/lib/utils";
+import {beutifyAgencyName, cn} from "@/lib/utils";
 import {
     Dialog,
     DialogContent,
@@ -19,6 +19,7 @@ import {
     DialogTitle
 } from "@/components/ui/dialog";
 import {RefreshCcw, Share} from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const Map = dynamic(() => import('@/components/maps/gamemap'), {
     ssr: false
@@ -35,6 +36,8 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
     const centerOfRoute = centerOfMass(currentRoute.geometry)
     const routegeojson = cleanCoords(currentRoute.geometry)
     const [boundbox, setBoundbox] = useState(bbox(routegeojson))
+
+    const router = useRouter()
 
 
 
@@ -83,7 +86,12 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                     showTiles={fin}
 
                 >
-                    <GeoJSON data={routegeojson} />
+                    {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                    {/* @ts-expect-error */}
+                    <GeoJSON data={routegeojson} onEachFeature={(feature, layer) => {
+                                 layer.setStyle({color: 'white'})
+                             }}
+                    />
 
                     {guesses.map((guess, index) => {
                         const guessRoute = routes.find(route => route.onestop_id === guess)
@@ -98,8 +106,33 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                         //eslint-disable-next-line @typescript-eslint/ban-ts-comment
                         //@ts-ignore
                         return (<GeoJSON key={index} data={cleanCoords(guessRoute.geometry)} onEachFeature={(feature, layer) => {
-                                         layer.setStyle({color: guessRoute.onestop_id === currentRoute.onestop_id ? 'green' : 'red'})
-                                     }}
+                                layer.setStyle(
+                                    {
+                                        color: 'red',
+                                    })
+                            }}
+                            />
+                        )
+                    })}
+
+                    {!fin && guesses.map((guess, index) => {
+                        const guessRoute = routes.find(route => route.onestop_id === guess)
+
+                        console.log(index, guess)
+
+                        if (!guessRoute?.geometry) {
+                            return null
+                        }
+
+                        // make the color of the geojson red, as its a guess
+                        //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        //@ts-ignore
+                        return (<GeoJSON key={index} data={cleanCoords(guessRoute.geometry)} onEachFeature={(feature, layer) => {
+                                layer.setStyle(
+                                    {
+                                        color: 'hsl(0, 0%, 30%)',
+                                    })
+                            }}
                             />
                         )
                     })}
@@ -230,7 +263,7 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                                 for (let i = guesses.length; i < 5; i++) {
                                     emojiString += '⬛'
                                 }
-                                const text = `${currentRoute.agency.agency_name} Routle ${new Date().toLocaleDateString()}\n${emojiString}\n\nhttps://routleunlimited.com/play/${currentRoute.agency.onestop_id}`
+                                const text = `${beutifyAgencyName(currentRoute.agency.agency_name)} Routle ${new Date().toLocaleDateString()}\n${emojiString}\n\nhttps://routleunlimited.com/play/${currentRoute.agency.onestop_id}`
                                 try {
                                     navigator.share({text: text})
                                 } catch (e: unknown) {
@@ -250,13 +283,13 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                         </Button>
                         <Button
                             onClick={() => {
-                                document.location.reload()
+                                router.push(`/play`)
                             }}
                             className={'w-full bg-primary text-primary-foreground'}
                             variant={'ghost'}
                         >
                             <RefreshCcw  className={'h-6 w-6'} />
-                            Play Again
+                            Play Another Game
 
                         </Button>
                     </DialogFooter>

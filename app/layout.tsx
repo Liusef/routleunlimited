@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import {AuthProvider, Profile} from "@/components/kinde";
+import routesvg from "@/public/routle.svg";
+import Image from "next/image";
 import Link from "next/link";
 
 const departureMono = localFont({
@@ -9,9 +11,58 @@ const departureMono = localFont({
     variable: "--font-departure-mono",
 });
 
+
+
+
+const title = "Routle Unlimited"
+const description = "Test your knowledge of transit agencies"
+
 export const metadata: Metadata = {
-  title: "Routle Unlimited",
-  description: "Test your knowledge of transit agencies",
+    title: title,
+    description:description,
+    openGraph: {
+        title: title,
+        description: description,
+        url: "https://routleunlimited.com",
+        type: "website",
+        locale: "en_US",
+        siteName: "Routle Unlimited",
+    },
+    twitter: {
+        card: 'summary',
+        title: title,
+        description: description,
+        siteId: '1467726470533754880',
+        creator: '@duckdoquack',
+    },
+    icons: {
+        icon: "/favicons/apple-touch-icon.png",
+        shortcut: "/favicons/favicon-16x16.png",
+        apple: "/favicons/apple-touch-icon.png",
+    },
+    category: 'technology',
+    keywords: [
+        "routle",
+        "trivia",
+        "transit trivia",
+        "transit",
+        "transportation",
+        "transportation trivia",
+        "public transportation",
+        "public transportation trivia",
+        "agency trivia",
+        "agency",
+        "bus trivia",
+        "bus",
+        "train trivia",
+        "train",
+        "subway trivia",
+        "subway",
+        "light rail trivia",
+        "light rail",
+        "commuter rail trivia",
+        "commuter rail",
+    ],
 };
 
 export const viewport: Viewport = {
@@ -37,7 +88,9 @@ export default function RootLayout({
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex-shrink-0 flex items-center">
-                            <Link className="text-xl font-bold text-white" href={'/'}>Routle Unlimited</Link>
+                            <Link className="text-xl font-bold text-white flex gap-2" href={'/'}>
+                                <Image alt={'logo'} src={routesvg} width={32} height={32}/>
+                                Routle Unlimited</Link>
                         </div>
                         <div className="flex items-center">
                             <Profile/>

@@ -9,7 +9,7 @@ export default function Home() {
           <div className="text-center p-8">
             <h1 className="text-6xl font-bold text-white mb-4">Routle Unlimited</h1>
             <p className="text-2xl text-zinc-400 mb-12">Test your knowledge of transit agencies</p>
-            <div className="space-y-6">
+            <div className="space-y-6 gap-3">
                 <Link href="/play">
                     <Button
                         variant={'ghost'}
@@ -23,6 +23,7 @@ export default function Home() {
                 <Link href="/leaderboards">
                     <Button
                        variant={'secondary'}
+                       className={"w-64 mx-auto bg-secondary text-secondary-foreground font-bold py-3 px-6 rounded-lg"}
                     >
                     See Leaderboards
                     </Button>
