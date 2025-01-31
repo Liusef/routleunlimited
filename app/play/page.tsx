@@ -69,6 +69,8 @@ export default function Play() {
                     </Card>
                 ))}
             </div>
+
+            
         </div>
     )
 }

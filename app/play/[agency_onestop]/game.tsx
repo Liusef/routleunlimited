@@ -18,8 +18,9 @@ import {
     DialogHeader,
     DialogTitle
 } from "@/components/ui/dialog";
-import {RefreshCcw, Share} from "lucide-react";
+import {Coffee, RefreshCcw, Share} from "lucide-react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const Map = dynamic(() => import('@/components/maps/gamemap'), {
     ssr: false
@@ -289,7 +290,7 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                             variant={'ghost'}
                         >
                             <RefreshCcw  className={'h-6 w-6'} />
-                            Play Another Game
+                            Play Another Agency
 
                         </Button>
                     </DialogFooter>
@@ -304,6 +305,23 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
 
                         >
                             Show the map again
+                        </Button>
+                    </div>
+
+                    <div className={'w-full text-white'}>
+                        <div className={'text-center'}>
+                            {'Like the game?'}
+                        </div>
+                        <Button asChild variant="outline" size="sm" className="w-full">
+                            <Link
+                                href="https://ko-fi.com/quacksire"
+                                target="_blank"
+                                rel="noopener"
+                                className="flex items-center space-x-2"
+                            >
+                                <Coffee className="h-4 w-4" />
+                                <span>Buy me a coffee</span>
+                            </Link>
                         </Button>
                     </div>
 

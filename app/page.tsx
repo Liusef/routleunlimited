@@ -2,8 +2,20 @@ import Link from "next/link"
 import {Button} from "@/components/ui/button";
 
 export default function Home() {
+
+    /*
+    <Link href="/leaderboards">
+                    <Button
+                       variant={'secondary'}
+                       className={"w-64 mx-auto bg-secondary text-secondary-foreground font-bold py-3 px-6 rounded-lg"}
+                    >
+                    See Leaderboards
+                    </Button>
+                </Link>
+     */
+
   return (
-      <div className={'flex-grow flex items-center justify-center min-h-screen mt-[-16]'}>
+      <div className={'flex-grow flex items-center justify-center mt-[-16]'}>
         {/* Main Content */}
         <main className="">
           <div className="text-center p-8">
@@ -12,7 +24,7 @@ export default function Home() {
             <div className="space-y-6 gap-3">
                 <Link href="/play">
                     <Button
-                        variant={'ghost'}
+                        variant={'outline'}
                         size={'lg'}
                         className="w-64 mx-auto bg-primary text-primary-foreground font-bold py-3 px-6 rounded-lg"
                     >
@@ -20,17 +32,11 @@ export default function Home() {
                     </Button>
                 </Link>
 
-                <Link href="/leaderboards">
-                    <Button
-                       variant={'secondary'}
-                       className={"w-64 mx-auto bg-secondary text-secondary-foreground font-bold py-3 px-6 rounded-lg"}
-                    >
-                    See Leaderboards
-                    </Button>
-                </Link>
+
             </div>
           </div>
         </main>
+
       </div>
   )
 }

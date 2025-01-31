@@ -5,6 +5,7 @@ import {AuthProvider, Profile} from "@/components/kinde";
 import routesvg from "@/public/routle.svg";
 import Image from "next/image";
 import Link from "next/link";
+import {Footer} from "@/components/footer";
 
 const departureMono = localFont({
     src: "./fonts/DepartureMono-Regular.woff",
@@ -68,7 +69,6 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
     width: 'device-width',
     initialScale: 1,
-    maximumScale: 1,
     userScalable: false,
     themeColor: '#18181b'
 }
@@ -98,7 +98,11 @@ export default function RootLayout({
                     </div>
                 </div>
             </nav>
-                <main className="flex-grow min-h-screen bg-zinc-900 text-white">{children}</main>
+                <main className="flex-grow min-h-screen bg-zinc-900 text-white">
+                    {children}
+                <Footer />
+                </main>
+
             </body>
         </html>
       </AuthProvider>
