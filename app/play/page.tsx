@@ -1,26 +1,7 @@
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
+import {agencies} from "@/lib/transit";
 
-interface AgencyCard {
-    title: string
-    subtitle: string
-    image: string
-    onestop: string
-    available: boolean
-}
-
-const agencies: AgencyCard[] = [
-    { title: "SFMTA", subtitle: "San Francisco Bay Area", image: "/sfmta-logo.svg", onestop: "o-9q8y-sfmta", available: true },
-    { title: "SamTrans", subtitle: "San Francisco Bay Area", image: "/samtrans-logo.svg", onestop: "o-9q8-samtrans",available: true },
-    { title: "AC Transit", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-actransit",available: true },
-    { title: "Wheels", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9q-wheelsbus",available: true },
-    { title: "VTA", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-vta",available: true },
-
-    { title: "MTS", subtitle: "San Diego", image: "/placeholder.svg", onestop: "o-9mu-mts",available: true },
-    { title: "King County Metro", subtitle: "Seattle, WA", image: "/placeholder.svg", onestop: "o-c23-metrotransit",available: true },
-    { title: "TriMet", subtitle: "Portland, OR", image: "/placeholder.svg", onestop: "o-c20-trimet",available: true },
-    { title: "More coming soon!", subtitle: "", image: "/placeholder.svg", onestop: "",available: false },
-]
 
 export default function Play() {
     return (
@@ -70,7 +51,7 @@ export default function Play() {
                 ))}
             </div>
 
-            
+
         </div>
     )
 }

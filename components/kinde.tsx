@@ -34,7 +34,7 @@ export function SignInButton() {
     const pathname = usePathname()
 
     return (
-        <LoginLink postLoginRedirectURL={'/' + pathname} orgCode={orgCode}>
+        <LoginLink postLoginRedirectURL={pathname} orgCode={orgCode}>
             <Button color={"primary"}>
                 Sign In
             </Button>

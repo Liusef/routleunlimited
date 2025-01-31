@@ -27,7 +27,6 @@ export const metadata: Metadata = {
         url: "https://routleunlimited.com",
         type: "website",
         locale: "en_US",
-        siteName: "Routle Unlimited",
     },
     twitter: {
         card: 'summary',

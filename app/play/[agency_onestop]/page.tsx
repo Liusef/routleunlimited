@@ -7,31 +7,7 @@ import { KVNamespace } from '@cloudflare/workers-types'
 import Game from "@/app/play/[agency_onestop]/game";
 import {Route, RoutesResponse} from "@/lib/types/transitland";
 import {beutifyAgencyName} from "@/lib/utils";
-
-
-import * as samtrans from '@/lib/transit/o-9q8-samtrans.json'
-import * as sfmta from '@/lib/transit/o-9q8y-sfmta.json'
-import * as actransit from '@/lib/transit/o-9q9-actransit.json'
-import * as wheels from '@/lib/transit/o-9q9q-wheelsbus.json'
-import * as mts from '@/lib/transit/o-9mu-mts.json'
-import * as octa from '@/lib/transit/o-9mu-orangecountytransportationauthority.json'
-import * as cota from '@/lib/transit/o-dphg-centralohiotransitauthority.json'
-import * as kingc from '@/lib/transit/o-c23-metrotransit.json'
-import * as trimet from '@/lib/transit/o-c20-trimet.json'
-import * as vta from "@/lib/transit/o-9q9-vta.json";
-
-const agencyMap: Record<string, RoutesResponse> = {
-    'o-9q8-samtrans': samtrans,
-    'o-9q8y-sfmta': sfmta,
-    'o-9q9-actransit': actransit,
-    'o-9q9q-wheelsbus': wheels,
-    'o-9q9-vta': vta,
-    'o-9mu-mts': mts,
-    'o-9mu-orangecountytransportationauthority': octa,
-    'o-dphg-centralohiotransitauthority': cota,
-    'o-c23-metrotransit': kingc,
-    'o-c20-trimet': trimet,
-}
+import {agencyMap} from "@/lib/transit";
 
 
 export async function generateMetadata({params}: { params: Promise<{ agency_onestop: string }>}) {
@@ -60,7 +36,6 @@ export async function generateMetadata({params}: { params: Promise<{ agency_ones
             url: "https://routleunlimited.com/play/" + agency_onestop,
             type: "website",
             locale: "en_US",
-            siteName: "Routle Unlimited - " + agency_name,
         },
         twitter: {
             card: 'summary',
@@ -192,6 +167,14 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
         await kv.put(`dailyroute:${agency_onestop}`, `${route_id}`, {
             expirationTtl: 86400
         })
+
+        // put another KV with unix timestamp for now plus the expiration, so that we can display the time left in the current round
+        await kv.put(`dailyroute:${agency_onestop}:timeleft`,  `${new Date(Date.now()).getTime() + 86400 * 1000}`, {
+            expirationTtl: 86400
+        })
+
+
+
 
 
 
