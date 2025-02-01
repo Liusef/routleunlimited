@@ -5,6 +5,7 @@ import { getRequestContext } from "@cloudflare/next-on-pages";
 import {CountdownTimer} from "@/components/countdown";
 
 export const runtime = 'edge';
+export const dynamic = 'force-dynamic'
 
 
 export default async function Play() {
