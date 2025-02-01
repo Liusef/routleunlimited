@@ -126,7 +126,6 @@ function sortRoutes(routes: Route[]) {
 
 export default async function Page({params}: { params: Promise<{ agency_onestop: string }>}) {
     const { agency_onestop } = await params
-    console.log(agency_onestop)
 
 
     const { env } = getRequestContext();
@@ -155,9 +154,13 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
     // get route id from kv, and then get the route from the json
     // if it doesn't exist, get a random route from the json and save it in kv
 
-
-    let route_id = await kv.get(`dailyroute:${agency_onestop}`, { type: 'text' })
-    console.log(route_id)
+    let route_id = null
+    try {
+        route_id = await kv.get(`dailyroute:${agency_onestop}`, { type: 'text' })
+        //console.log(route_id)
+    } catch {
+        // no route, get a random one
+    }
     if (!route_id) {
         //eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -165,11 +168,6 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
         const route = json.routes[Math.floor(Math.random() * json.routes.length)]
         route_id = route?.onestop_id ? route.onestop_id : `${route.id}`
         await kv.put(`dailyroute:${agency_onestop}`, `${route_id}`, {
-            expirationTtl: 86400
-        })
-
-        // put another KV with unix timestamp for now plus the expiration, so that we can display the time left in the current round
-        await kv.put(`dailyroute:${agency_onestop}:timeleft`,  `${new Date(Date.now()).getTime() + 86400 * 1000}`, {
             expirationTtl: 86400
         })
 

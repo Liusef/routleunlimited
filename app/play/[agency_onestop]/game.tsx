@@ -60,8 +60,6 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
             setModal(true)
         }
 
-        console.log(boundbox)
-
     }, [guesses]);
 
 
@@ -97,7 +95,7 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                     {guesses.map((guess, index) => {
                         const guessRoute = routes.find(route => route.onestop_id === guess)
 
-                        console.log(index, guess)
+                        //console.log(index, guess)
 
                         if (!guessRoute?.geometry) {
                             return null
@@ -119,7 +117,7 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                     {!fin && guesses.map((guess, index) => {
                         const guessRoute = routes.find(route => route.onestop_id === guess)
 
-                        console.log(index, guess)
+                        //console.log(index, guess)
 
                         if (!guessRoute?.geometry) {
                             return null
@@ -252,7 +250,7 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                             onClick={() => {
 
                                 /*
-                                Muni Routle 01/28/2025
+                                [agency]] Routle mo/day/year
                                  🟩 ⬛ ⬛ ⬛ ⬛
                                  */
 

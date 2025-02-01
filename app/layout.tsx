@@ -19,6 +19,7 @@ const title = "Routle Unlimited"
 const description = "Test your knowledge of transit agencies"
 
 export const metadata: Metadata = {
+    metadataBase: new URL('https://routleunlimited.com'),
     title: title,
     description:description,
     openGraph: {
@@ -27,6 +28,7 @@ export const metadata: Metadata = {
         url: "https://routleunlimited.com",
         type: "website",
         locale: "en_US",
+        images: '/opengraph-image.png',
     },
     twitter: {
         card: 'summary',
