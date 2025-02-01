@@ -9,6 +9,8 @@ import {Route, RoutesResponse} from "@/lib/types/transitland";
 import {beutifyAgencyName} from "@/lib/utils";
 import {agencyMap} from "@/lib/transit";
 
+import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server"
+
 
 export async function generateMetadata({params}: { params: Promise<{ agency_onestop: string }>}) {
 
@@ -150,6 +152,10 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
         }
     }
 
+    // if authenticated, get the user, else return null
+    const {getUser, isAuthenticated} = getKindeServerSession();
+    const user = (await isAuthenticated()) ? await getUser() : null;
+
 
     // get route id from kv, and then get the route from the json
     // if it doesn't exist, get a random route from the json and save it in kv
@@ -170,6 +176,13 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
         await kv.put(`dailyroute:${agency_onestop}`, `${route_id}`, {
             expirationTtl: 86400
         })
+
+        // if the user is authenticated, log them in the kv as the person who rolled the route
+        if (user) {
+            await kv.put(`rolledby:${agency_onestop}`, `${user.id}`, {
+                expirationTtl: 86400
+            })
+        }
 
 
 
