@@ -7,6 +7,10 @@ import {CountdownTimer} from "@/components/countdown";
 export const runtime = 'edge';
 export const dynamic = 'force-dynamic'
 
+// Next.js will invalidate the cache when a
+// request comes in, at most once every 60 seconds.
+export const revalidate = 60
+
 
 export default async function Play() {
     const { env } = getRequestContext();
