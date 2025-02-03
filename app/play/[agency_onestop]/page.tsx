@@ -172,6 +172,17 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
         // @ts-ignore
         // get route
         const route = json.routes[Math.floor(Math.random() * json.routes.length)]
+
+        // if route.geometry is empty, reroll
+        if (!route.geometry) {
+            return {
+                status: 302,
+                headers: {
+                    location: `/play/${agency_onestop}`,
+                },
+            }
+        }
+
         route_id = route?.onestop_id ? route.onestop_id : `${route.id}`
         await kv.put(`dailyroute:${agency_onestop}`, `${route_id}`, {
             expirationTtl: 86400
