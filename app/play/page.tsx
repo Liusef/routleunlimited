@@ -42,16 +42,30 @@ export default async function Play() {
      * }
      */
 
-    //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    const times: Record<string, number> = timeReminaingKeys.keys.reduce((acc, key) => {
-        //eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const [_, agency] = key.name.split(':');
+    let times: Record<string, number> = {};
+    if (timeReminaingKeys.keys.length === 0) {
+        times = agencies.reduce((acc, agency) => {
+            //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-expect-error
+            acc[agency.onestop] = 0;
+            return acc;
+        }, {});
+
+    } else {
         //eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-expect-error
-        acc[agency] = parseInt(key.expiration) * 1000;
-        return acc;
-    });
+        // @ts-expect-error
+        times = timeReminaingKeys.keys.reduce((acc, key) => {
+            //eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const [_, agency] = key.name.split(':');
+            //eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-expect-error
+            acc[agency] = parseInt(key.expiration) * 1000;
+            return acc;
+        });
+
+    }
+
+
 
 
     return (

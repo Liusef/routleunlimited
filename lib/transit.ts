@@ -11,6 +11,10 @@ import * as vta from "@/lib/transit/o-9q9-vta.json";
 
 
 import {RoutesResponse} from "@/lib/types/transitland";
+
+/**
+ * Agency data
+ */
 export const agencyMap: Record<string, RoutesResponse> = {
     'o-9q8-samtrans': samtrans,
     'o-9q8y-sfmta': sfmta,

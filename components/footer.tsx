@@ -1,5 +1,10 @@
 import Link from "next/link"
 
+/**
+ * Footer is a component that displays the footer of the website
+ * @returns {Element}
+ * @constructor
+ */
 export function Footer() {
     return (
         <footer className="bg-zinc-900 text-zinc-400 w-full content-center">

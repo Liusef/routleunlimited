@@ -25,11 +25,21 @@ const orgCode = 'org_c7b8d71661610'
 
 //////////////
 
-
+/**
+ * AuthProvider is a wrapper component that provides the KindeProvider
+ * @param {any} children
+ * @returns {Element}
+ * @constructor
+ */
 export const AuthProvider = ({children}: {children: React.ReactNode}) => {
     return <KindeProvider>{children}</KindeProvider>;
 };
 
+/**
+ * SignInButton is a button uses the LoginLink component to redirect to the login page
+ * @returns {Element}
+ * @constructor
+ */
 export function SignInButton() {
     const pathname = usePathname()
 
@@ -41,6 +51,11 @@ export function SignInButton() {
         </LoginLink>)
 }
 
+/**
+ * SignOutButton is a button uses the LogoutLink component to redirect to the logout page
+ * @returns {Element}
+ * @constructor
+ */
 export function SignOutButton() {
     return (<LogoutLink className={'w-full'}>
         <Button color={"danger"} className={'w-full'} >
@@ -49,6 +64,11 @@ export function SignOutButton() {
     </LogoutLink>)
 }
 
+/**
+ * Greeting is a component that displays a greeting message to the user, using the useKindeBrowserClient hook
+ * @returns {Element}
+ * @constructor
+ */
 export function Greeting() {
     const {
         isLoading,
@@ -73,6 +93,11 @@ export function Greeting() {
     )
 }
 
+/**
+ * Profile is a component that displays the user's profile picture and name, using the useKindeBrowserClient hook, and provides a dropdown menu with options to view settings, support, and logout
+ * @returns {Element}
+ * @constructor
+ */
 export function Profile() {
     const {
         isLoading,
@@ -138,6 +163,11 @@ export function Profile() {
     )
 }
 
+/**
+ * ProfilePic is a component that displays the user's profile picture, using the useKindeBrowserClient hook
+ * @returns {Element | null}
+ * @constructor
+ */
 export function ProfilePic() {
     const {
         isLoading,
@@ -163,6 +193,13 @@ export function ProfilePic() {
     </Avatar>
 }
 
+/**
+ * CTALogin (Call To Action) is a component that displays a button that redirects to the login page, using the LoginLink component
+ * @param {string} btnText
+ * @param {Element} arrow
+ * @returns {Element}
+ * @constructor
+ */
 export function CTALogin({ btnText = `Continue`, arrow = <ChevronRightIcon className="ml-2 h-4 w-4" />}) {
 
     const [pressed, setPressed] = useState(false)

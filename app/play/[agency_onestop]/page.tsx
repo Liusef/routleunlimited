@@ -6,7 +6,7 @@ export const runtime = 'edge';
 import { KVNamespace } from '@cloudflare/workers-types'
 import Game from "@/app/play/[agency_onestop]/game";
 import {Route, RoutesResponse} from "@/lib/types/transitland";
-import {beutifyAgencyName} from "@/lib/utils";
+import {beutifyAgencyName, sendDiscordWebhook} from "@/lib/utils";
 import {agencyMap} from "@/lib/transit";
 
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server"
@@ -183,6 +183,20 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
                 expirationTtl: 86400
             })
         }
+
+        const expire = new Date() // now
+        // add 24 hours in seconds
+        expire.setSeconds(expire.getSeconds() + 86400)
+        // get unix timestamp, for discord
+        const expireTimestamp = Math.floor(expire.getTime() / 1000)
+
+
+        // Example usage
+        const webhookUrl = "https://discord.com/api/webhooks/1335878325570113589/cWprJA_f6yCu5J8LaZyTQ4D8yOGEl0lNAV5KBjmvo71kISpIwrVS5bRhjQdA5ASnSaRV"; // Replace with your actual webhook URL
+        await sendDiscordWebhook(webhookUrl, `\`${agency_onestop}\` has been rerolled ${user && `by \`${user.given_name} ${String(user.family_name).at(0)}.\``} and will be rerolled <t:${expireTimestamp}:R>`, "RoutleUnlimited", "https://routleunlimited.com/routeslogo.png");
+
+
+
 
 
 

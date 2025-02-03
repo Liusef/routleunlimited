@@ -6,6 +6,12 @@ interface CountdownTimerProps {
     targetDate: number // Unix timestamp
 }
 
+/**
+ * CountdownTimer is a component that displays a countdown timer until the target date
+ * @param {CountdownTimerProps} props
+ * @returns {Element}
+ * @constructor
+ */
 export function CountdownTimer({ targetDate }: CountdownTimerProps) {
     const [timeLeft, setTimeLeft] = useState<string>("")
 
