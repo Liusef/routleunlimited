@@ -65,6 +65,11 @@ export default async function Play() {
 
     }
 
+    // sort the agencies by agency.title alphabetically
+    agencies.sort((a, b) => a.title.localeCompare(b.title));
+
+    // append one of the agencies to the end of the array
+    agencies.push({ title: "More coming soon!", subtitle: "", image: "/placeholder.svg", onestop: "",available: false });
 
 
 

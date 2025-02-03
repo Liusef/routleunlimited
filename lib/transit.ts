@@ -8,6 +8,7 @@ import * as cota from '@/lib/transit/o-dphg-centralohiotransitauthority.json'
 import * as kingc from '@/lib/transit/o-c23-metrotransit.json'
 import * as trimet from '@/lib/transit/o-c20-trimet.json'
 import * as vta from "@/lib/transit/o-9q9-vta.json";
+import * as la from "@/lib/transit/o-9q5-metro~losangeles.json";
 
 
 import {RoutesResponse} from "@/lib/types/transitland";
@@ -26,6 +27,7 @@ export const agencyMap: Record<string, RoutesResponse> = {
     'o-dphg-centralohiotransitauthority': cota,
     'o-c23-metrotransit': kingc,
     'o-c20-trimet': trimet,
+    'o-9q5-metro~losangeles': la,
 }
 
 export interface AgencyCard {
@@ -42,9 +44,8 @@ export const agencies: AgencyCard[] = [
     { title: "AC Transit", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-actransit",available: true },
     { title: "Wheels", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9q-wheelsbus",available: true },
     { title: "VTA", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-vta",available: true },
-
     { title: "MTS", subtitle: "San Diego", image: "/placeholder.svg", onestop: "o-9mu-mts",available: true },
     { title: "King County Metro", subtitle: "Seattle, WA", image: "/placeholder.svg", onestop: "o-c23-metrotransit",available: true },
     { title: "TriMet", subtitle: "Portland, OR", image: "/placeholder.svg", onestop: "o-c20-trimet",available: true },
-    { title: "More coming soon!", subtitle: "", image: "/placeholder.svg", onestop: "",available: false },
+    { title: "LA Metro", subtitle: "Los Angeles, CA", image: "/placeholder.svg", onestop: "o-9q5-metro~losangeles", available: true },
 ]
