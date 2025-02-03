@@ -193,7 +193,7 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
 
         // Example usage
         const webhookUrl = "https://discord.com/api/webhooks/1335878325570113589/cWprJA_f6yCu5J8LaZyTQ4D8yOGEl0lNAV5KBjmvo71kISpIwrVS5bRhjQdA5ASnSaRV"; // Replace with your actual webhook URL
-        await sendDiscordWebhook(webhookUrl, `\`${agency_onestop}\` has been rerolled ${user && `by \`${user.given_name} ${String(user.family_name).at(0)}.\``} and will be rerolled <t:${expireTimestamp}:R>`, "RoutleUnlimited", "https://routleunlimited.com/routeslogo.png");
+        await sendDiscordWebhook(webhookUrl, `\`${agency_onestop}\` has been rerolled${user ? `by \`${user.given_name} ${String(user.family_name).at(0)}.\`` : ''} and will be rerolled <t:${expireTimestamp}:R>`, "RoutleUnlimited", "https://routleunlimited.com/routeslogo.png");
 
 
 
