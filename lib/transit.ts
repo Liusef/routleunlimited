@@ -49,4 +49,5 @@ export const agencies: AgencyCard[] = [
     { title: "TriMet", subtitle: "Portland, OR", image: "/placeholder.svg", onestop: "o-c20-trimet",available: true },
     { title: "LA Metro", subtitle: "Los Angeles, CA", image: "/placeholder.svg", onestop: "o-9q5-metro~losangeles", available: true },
     { title: "Central Ohio Transit Authority", subtitle: "Columbus, OH", image: "/placeholder.svg", onestop: "o-dphg-centralohiotransitauthority", available: true },
+    { title: "Orange County Transportation Authority", subtitle: "Orange County, CA", image: "/placeholder.svg", onestop: "o-9mu-orangecountytransportationauthority", available: true },
 ]
