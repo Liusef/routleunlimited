@@ -193,6 +193,16 @@ export function ProfilePic() {
     </Avatar>
 }
 
+
+export function KindeLogin({children}: {children: React.ReactNode}) {
+    const pathname = usePathname()
+    return <LoginLink postLoginRedirectURL={pathname} orgCode={orgCode}>
+        {children}
+    </LoginLink>
+}
+
+
+
 /**
  * CTALogin (Call To Action) is a component that displays a button that redirects to the login page, using the LoginLink component
  * @param {string} btnText

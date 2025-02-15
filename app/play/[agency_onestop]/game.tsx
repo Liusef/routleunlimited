@@ -19,7 +19,7 @@ import {
     DialogTitle
 } from "@/components/ui/dialog";
 import {Coffee, RefreshCcw, Share} from "lucide-react";
-import { useRouter } from "next/navigation";
+import {usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 
 const Map = dynamic(() => import('@/components/maps/gamemap'), {
@@ -38,9 +38,16 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
     const routegeojson = cleanCoords(currentRoute.geometry)
     const [boundbox, setBoundbox] = useState(bbox(routegeojson))
 
+    const [practiceMode, setPracticeMode] = useState(false)
+
     const router = useRouter()
+    const pathname = usePathname()
 
-
+    useEffect(() => {
+        if (pathname.includes('practice')) {
+            setPracticeMode(true)
+        }
+    }, []);
 
     useEffect(() => {
         // using 'combine' from turf, we can combine the features of the route and the guesses, then get the bounds of that
@@ -246,57 +253,74 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
 
                     <DialogFooter className={'gap-2'}>
 
-                        <Button
-                            onClick={() => {
+                        {!practiceMode && (
+                            <Button
+                                onClick={() => {
 
-                                /*
-                                [agency]] Routle mo/day/year
-                                 🟩 ⬛ ⬛ ⬛ ⬛
-                                 */
+                                    /*
+                                    [agency]] Routle mo/day/year
+                                     🟩 ⬛ ⬛ ⬛ ⬛
+                                     */
 
-                                /**
-                                 * emojis work like this:
-                                 *  🟩 = correct
-                                 *  🟥 = incorrect
-                                 *  ⬛ = not guessed (usually if the person guesses the route in under 5 guesses, we use this to fill in the rest of the guesses)
-                                 *  the guesses array may not be 5 long, so we need to fill in the rest of the guesses with ⬛ if the user guesses the route in under 5 guesses
-                                 *
-                                 * examples:
-                                 *
-                                 *  🟥 🟥 🟥 🟥🟩
-                                 *  🟩⬛⬛⬛⬛
-                                 *  🟥🟥🟩⬛⬛
-                                 */
+                                    /**
+                                     * emojis work like this:
+                                     *  🟩 = correct
+                                     *  🟥 = incorrect
+                                     *  ⬛ = not guessed (usually if the person guesses the route in under 5 guesses, we use this to fill in the rest of the guesses)
+                                     *  the guesses array may not be 5 long, so we need to fill in the rest of the guesses with ⬛ if the user guesses the route in under 5 guesses
+                                     *
+                                     * examples:
+                                     *
+                                     *  🟥 🟥 🟥 🟥🟩
+                                     *  🟩⬛⬛⬛⬛
+                                     *  🟥🟥🟩⬛⬛
+                                     */
 
-                                let emojiString = ''
-                                guesses.forEach((guess) => {
-                                    if (guess === currentRoute.onestop_id) {
-                                        emojiString += '🟩'
-                                    } else {
-                                        emojiString += '🟥'
+                                    let emojiString = ''
+                                    guesses.forEach((guess) => {
+                                        if (guess === currentRoute.onestop_id) {
+                                            emojiString += '🟩'
+                                        } else {
+                                            emojiString += '🟥'
+                                        }
+                                    })
+                                    for (let i = guesses.length; i < 5; i++) {
+                                        emojiString += '⬛'
                                     }
-                                })
-                                for (let i = guesses.length; i < 5; i++) {
-                                    emojiString += '⬛'
-                                }
-                                const text = `${beutifyAgencyName(currentRoute.agency.agency_name)} Routle ${new Date().toLocaleDateString()}\n${emojiString}\n\nhttps://routleunlimited.com/play/${currentRoute.agency.onestop_id}`
-                                try {
-                                    navigator.share({text: text})
-                                } catch (e: unknown) {
+                                    const text = `${beutifyAgencyName(currentRoute.agency.agency_name)} Routle ${new Date().toLocaleDateString()}\n${emojiString}\n\nhttps://routleunlimited.com/play/${currentRoute.agency.onestop_id}`
+                                    try {
+                                        navigator.share({text: text})
+                                    } catch (e: unknown) {
 
-                                    console.error(e)
-                                    // fallback to copying the link to the clipboard
-                                    navigator.clipboard.writeText(text)
+                                        console.error(e)
+                                        // fallback to copying the link to the clipboard
+                                        navigator.clipboard.writeText(text)
 
-                                }
-                            }}
-                            className={'w-full bg-primary text-primary-foreground'}
-                            variant={'ghost'}
-                        >
-                            <Share className={'h-6 w-6'} />
-                            Share your score
+                                    }
+                                }}
+                                className={'w-full bg-primary text-primary-foreground'}
+                                variant={'ghost'}
+                            >
+                                <Share className={'h-6 w-6'} />
+                                Share your score
 
-                        </Button>
+                            </Button>
+                        )}
+                        {practiceMode && (
+                            <Button
+                                onClick={() => {
+                                    // force a page refresh
+                                    router.push(`/play/${currentRoute.agency.onestop_id}/practice`)
+                                }}
+                                className={'w-full bg-primary text-primary-foreground'}
+                                variant={'ghost'}
+                            >
+                                <RefreshCcw  className={'h-6 w-6'} />
+                                Play Again
+
+                            </Button>
+                        )}
+
                         <Button
                             onClick={() => {
                                 router.push(`/play`)
@@ -336,6 +360,20 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                             >
                                 <Coffee className="h-4 w-4" />
                                 <span>Buy me a coffee</span>
+                            </Link>
+                        </Button>
+                    </div>
+
+                    <div className={'w-full text-white'}>
+                        <div className={'text-center'}>
+                            {'Need to practice?'}
+                        </div>
+                        <Button asChild variant="outline" size="sm" className="w-full">
+                            <Link
+                                href={`/play/${currentRoute.agency.onestop_id}/practice`}
+                                className="flex items-center space-x-2"
+                            >
+                                <span>Practice!</span>
                             </Link>
                         </Button>
                     </div>
