@@ -10,7 +10,7 @@ import * as trimet from '@/lib/transit/o-c20-trimet.json'
 import * as vta from "@/lib/transit/o-9q9-vta.json";
 import * as la from "@/lib/transit/o-9q5-metro~losangeles.json";
 import * as cc from "@/lib/transit/o-9q9p-countyconnection.json";
-import * as dc from "@/lib/transit/o-dqc-met.json";
+// * as dc from "@/lib/transit/o-dqc-met.json";
 
 
 import {RoutesResponse} from "@/lib/types/transitland";
