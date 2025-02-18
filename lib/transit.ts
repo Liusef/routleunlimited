@@ -30,8 +30,8 @@ export const agencyMap: Record<string, RoutesResponse> = {
     'o-c23-metrotransit': kingc,
     'o-c20-trimet': trimet,
     'o-9q5-metro~losangeles': la,
-    'o-9q9p-countyconnection': cc,
-    'o-dqc-met': dc
+    'o-9q9p-countyconnection': cc
+    //'o-dqc-met': dc
 }
 
 export interface AgencyCard {
@@ -55,5 +55,5 @@ export const agencies: AgencyCard[] = [
     { title: "Central Ohio Transit Authority", subtitle: "Columbus, OH", image: "/placeholder.svg", onestop: "o-dphg-centralohiotransitauthority", available: true },
     { title: "Orange County Transportation Authority", subtitle: "Orange County, CA", image: "/placeholder.svg", onestop: "o-9mu-orangecountytransportationauthority", available: true },
     { title: "County Connection", subtitle: "Contra Costa County, CA", image: "/placeholder.svg", onestop: "o-9q9p-countyconnection", available: true },
-    { title: "WMATA", subtitle: "Washington DC", image: "/placeholder.svg", onestop: "o-dqc-met", available: true },
+    //{ title: "WMATA", subtitle: "Washington DC", image: "/placeholder.svg", onestop: "o-dqc-met", available: true },
 ]
