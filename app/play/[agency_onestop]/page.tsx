@@ -10,6 +10,8 @@ import {beutifyAgencyName, sendDiscordWebhook} from "@/lib/utils";
 import {agencyMap} from "@/lib/transit";
 
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server"
+import {Button} from "@/components/ui/button";
+import Link from 'next/link';
 
 
 export async function generateMetadata({params}: { params: Promise<{ agency_onestop: string }>}) {
@@ -152,6 +154,22 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
         }
     }
 
+
+    // if json.routes is empty, return a "whoops, [agency] sucks" page
+    if (json.routes.length === 0) {
+        return <div className="flex flex-col items-center justify-center h-screen text-center">
+            <h1 className="text-3xl font-bold mb-4">The agency sucks</h1>
+            <Button asChild variant="outline" size="sm" className="">
+                <Link
+                    href="/play"
+                    className="flex items-center space-x-2"
+                >
+                    Return to Play
+                </Link>
+            </Button>
+        </div>
+    }
+
     // if authenticated, get the user, else return null
     const {getUser, isAuthenticated} = getKindeServerSession();
     const user = (await isAuthenticated()) ? await getUser() : null;
@@ -162,7 +180,7 @@ export default async function Page({params}: { params: Promise<{ agency_onestop:
 
     let route_id = null
     try {
-        route_id = await kv.get(`dailyroute:${agency_onestop}`, { type: 'text' })
+        route_id = await kv.get(`dailyroute:${agency_onestop}`, {type: 'text'})
         //console.log(route_id)
     } catch {
         // no route, get a random one
