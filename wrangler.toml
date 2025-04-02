@@ -1,9 +1,0 @@
-name = "routleunlimited"
-compatibility_date = "2024-09-23"
-compatibility_flags = ["nodejs_compat"]
-pages_build_output_dir = ".vercel/output/static"
-
-[[kv_namespaces]]
-binding = "routleunlimited"
-id = "e166d02cda3f44c69b8e803c3e39d643"
-

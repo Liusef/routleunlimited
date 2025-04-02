@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "main": ".open-next/worker.js",
+  "name": "routleunlimited",
+  "compatibility_date": "2024-12-30",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      // The service should match the "name" of your worker
+      "service": "routleunlimited"
+    }
+  ],
+  "kv_namespaces": [
+
+    {
+       "binding": "routleunlimited",
+       "id": "e166d02cda3f44c69b8e803c3e39d643"
+     }
+    // Create a KV binding with the binding name "NEXT_INC_CACHE_KV"
+    // to enable the KV based caching:
+  ]
+}

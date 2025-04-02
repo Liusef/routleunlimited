@@ -1,7 +1,5 @@
-
-
-import { getRequestContext } from '@cloudflare/next-on-pages';
-export const runtime = 'edge';
+import { getCloudflareContext as getRequestContext } from '@opennextjs/cloudflare';
+//export const runtime = 'edge';
 
 import { KVNamespace } from '@cloudflare/workers-types'
 import Game from "@/app/play/[agency_onestop]/game";
@@ -12,6 +10,8 @@ import {agencyMap} from "@/lib/transit";
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server"
 import {Button} from "@/components/ui/button";
 import Link from 'next/link';
+
+
 
 
 export async function generateMetadata({params}: { params: Promise<{ agency_onestop: string }>}) {

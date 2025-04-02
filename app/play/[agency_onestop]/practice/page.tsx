@@ -1,7 +1,8 @@
 
 
-import { getRequestContext } from '@cloudflare/next-on-pages';
-export const runtime = 'edge';
+import { getCloudflareContext as getRequestContext } from '@opennextjs/cloudflare';
+
+//export const runtime = 'edge';
 
 import { KVNamespace } from '@cloudflare/workers-types'
 import Game from "@/app/play/[agency_onestop]/game";

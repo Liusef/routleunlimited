@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { Card, CardContent } from "@/components/ui/card"
 import {agencies} from "@/lib/transit";
-import { getRequestContext } from "@cloudflare/next-on-pages";
+import { getCloudflareContext as getRequestContext } from '@opennextjs/cloudflare';
+
 import {CountdownTimer} from "@/components/countdown";
 
-export const runtime = 'edge';
+//export const runtime = 'edge';
 export const dynamic = 'force-dynamic'
 
 // Next.js will invalidate the cache when a

@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+
+    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.4.6",
@@ -49,9 +53,9 @@
     "vaul": "^1.1.2"
   },
   "devDependencies": {
-    "@cloudflare/next-on-pages": "^1.13.7",
     "@cloudflare/workers-types": "^4.20250124.3",
     "@eslint/eslintrc": "^3",
+    "@opennextjs/cloudflare": "^0.6.6",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -60,6 +64,6 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5",
-    "wrangler": "^3.105.1"
+    "wrangler": "^4.6.0"
   }
 }
