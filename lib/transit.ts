@@ -62,7 +62,6 @@ export interface AgencyCard {
 }
 
 export const agencies: AgencyCard[] = [
-    /*
     { title: "SFMTA", subtitle: "San Francisco Bay Area", image: "/sfmta-logo.svg", onestop: "o-9q8y-sfmta", available: true },
     { title: "SamTrans", subtitle: "San Francisco Bay Area", image: "/samtrans-logo.svg", onestop: "o-9q8-samtrans",available: true },
     { title: "AC Transit", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-actransit",available: true },
@@ -77,13 +76,15 @@ export const agencies: AgencyCard[] = [
     { title: "County Connection", subtitle: "Contra Costa County, CA", image: "/placeholder.svg", onestop: "o-9q9p-countyconnection", available: true },
     { title: "Caltrain", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-caltrain", available: true },
     { title: "Toronto Transit Commission", subtitle: "Toronto, ON", image: "/placeholder.svg", onestop: "o-dpz8-ttc", available: true },
-    */
-    { title: "Foothill Transit", subtitle: "San Gabriel Valley, CA", image: "/placeholder.svg", onestop: "o-9qh1-foothilltransit", available: true },
-    { title: "BART", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-bart", available: true },
-    { title: "San Francisco Bay Ferry", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9p-sanfranciscobayferry", available: true },
-    { title: "Sacramento Regional Transit", subtitle: "Sacramento, CA", image: "/placeholder.svg", onestop: "o-9qce-sacramentoregionaltransit", available: true },
-    { title: "Omnitrans", subtitle: "San Bernardino County, CA", image: "/placeholder.svg", onestop: "o-9qh-omnitrans", available: true },
-    { title: "Utah Transit Authority", subtitle: "Salt Lake City, UT", image: "/placeholder.svg", onestop: "o-9x0-utahtransitauthority", available: true },
-    { title: "MARTA", subtitle: "Atlanta, GA", image: "/placeholder.svg", onestop: "o-dnh-metropolitanatlantarapidtransitauthority", available: true },
+
+
+    // coming soon
+    { title: "Foothill Transit", subtitle: "San Gabriel Valley, CA", image: "/placeholder.svg", onestop: "o-9qh1-foothilltransit", available: false },
+    { title: "BART", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-bart", available: false },
+    { title: "San Francisco Bay Ferry", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9p-sanfranciscobayferry", available: false },
+    { title: "Sacramento Regional Transit", subtitle: "Sacramento, CA", image: "/placeholder.svg", onestop: "o-9qce-sacramentoregionaltransit", available: false },
+    { title: "Omnitrans", subtitle: "San Bernardino County, CA", image: "/placeholder.svg", onestop: "o-9qh-omnitrans", available: false },
+    { title: "Utah Transit Authority", subtitle: "Salt Lake City, UT", image: "/placeholder.svg", onestop: "o-9x0-utahtransitauthority", available: false },
+    { title: "MARTA", subtitle: "Atlanta, GA", image: "/placeholder.svg", onestop: "o-dnh-metropolitanatlantarapidtransitauthority", available: false },
     //{ title: "WMATA", subtitle: "Washington DC", image: "/placeholder.svg", onestop: "o-dqc-met", available: true },
 ]
