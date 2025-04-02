@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import {AuthProvider, Profile} from "@/components/kinde";
+import {AuthProvider} from "@/components/kinde";
 import routesvg from "@/public/routle.svg";
 import Image from "next/image";
 import Link from "next/link";

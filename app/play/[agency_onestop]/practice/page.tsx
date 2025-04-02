@@ -10,10 +10,10 @@ import {Route, RoutesResponse} from "@/lib/types/transitland";
 import {beutifyAgencyName} from "@/lib/utils";
 import {agencyMap} from "@/lib/transit";
 
-import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server"
+//import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server"
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import {KindeLogin} from "@/components/kinde";
+//import {KindeLogin} from "@/components/kinde";
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 60
