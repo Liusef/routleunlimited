@@ -7,11 +7,10 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import {useState, useEffect, useCallback} from "react"
-import { Map, Route, MousePointer, Share2, Info } from "lucide-react"
+import { Map, Route, MousePointer, Share2 } from "lucide-react"
 
 export default function Instructions() {
     const [isOpen, setIsOpen] = useState(true)
