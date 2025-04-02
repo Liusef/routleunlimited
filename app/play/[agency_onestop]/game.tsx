@@ -21,10 +21,19 @@ import {
 import {Coffee, RefreshCcw, Share} from "lucide-react";
 import {usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import Instructions from "@/components/instructions";
 
 const Map = dynamic(() => import('@/components/maps/gamemap'), {
     ssr: false
 })
+
+/**
+ *
+ * @param {any} currentRoute
+ * @param {any} routes
+ * @returns {Element}
+ * @constructor
+ */
 
 
 
@@ -83,6 +92,8 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
         <div className={'bg-zinc-900 w-screen h-screen'}>
             <div className={'w-full h-3/5'}>
                 <Suspense>
+                <Instructions />
+
                 {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                 {/* @ts-expect-error */}
 
@@ -384,3 +395,18 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
         </div>
     )
 }
+
+// instructions for playing the game:
+// 1. the user will be shown a map with a route on it
+// 2. the user will have to guess the route
+// 3. the user will have 5 guesses to guess the route
+// 4. the user can click on a route to guess it
+// 5. if the user guesses the route correctly, they will be shown a modal with a share button to share with friends
+
+/**
+ * make instructions for the users to see when they first start the game, in copytext
+ *
+ * here is an example of what the instructions could look like:
+ *
+ * Welcome to Routle Unlimited! Here are the instructions:
+ */

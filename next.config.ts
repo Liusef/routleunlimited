@@ -3,6 +3,7 @@ const nextConfig = {
     images: {
         domains: ["gravatar.com"],
     },
+    allowedDevOrigins: ["localhost", "*.quacksire.dev", "*.routleunlimited.com"],
 
 };
 

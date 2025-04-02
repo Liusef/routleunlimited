@@ -15,7 +15,7 @@ export function cn(...inputs: ClassValue[]) {
  * @param {string} name
  * @returns {string}
  */
-export function beutifyAgencyName(name: string) {
+export function beutifyAgencyName(name: string | null | undefined) {
   let agency_name = name
 
   // clean up

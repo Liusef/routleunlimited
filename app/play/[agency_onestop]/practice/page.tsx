@@ -30,8 +30,6 @@ export async function generateMetadata({params}: { params: Promise<{ agency_ones
     const agency_name = beutifyAgencyName(json.routes[0].agency.agency_name)
 
 
-
-
     console.log(json.routes[0].agency)
     const title = `Routle Unlimited - ${agency_name}`
     const description = `Test your knowledge of ${agency_name}`
