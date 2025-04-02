@@ -17,6 +17,7 @@ import * as foothill from "@/lib/transit/o-9qh1-foothilltransit.json";
 import * as bart from "@/lib/transit/o-9q9-bart.json";
 import * as bayferry from "@/lib/transit/o-9q9p-sanfranciscobayferry.json";
 import * as sacrt from "@/lib/transit/o-9qce-sacramentoregionaltransit.json";
+import * as omni from "@/lib/transit/o-9qh-omnitrans.json";
 
 
 import {RoutesResponse} from "@/lib/types/transitland";
@@ -42,7 +43,9 @@ export const agencyMap: Record<string, RoutesResponse> = {
     "o-9qh1-foothilltransit": foothill,
     "o-9q9-bart": bart,
     "o-9q9p-sanfranciscobayferry": bayferry,
-    "o-9qce-sacramentoregionaltransit": sacrt
+    "o-9qce-sacramentoregionaltransit": sacrt,
+    "o-9qh-omnitrans": omni
+
     //'o-dqc-met': dc
 }
 
@@ -74,5 +77,7 @@ export const agencies: AgencyCard[] = [
     { title: "BART", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-bart", available: false },
     { title: "San Francisco Bay Ferry", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9p-sanfranciscobayferry", available: false },
     { title: "Sacramento Regional Transit", subtitle: "Sacramento, CA", image: "/placeholder.svg", onestop: "o-9qce-sacramentoregionaltransit", available: false },
+    { title: "Omnitrans", subtitle: "San Bernardino County, CA", image: "/placeholder.svg", onestop: "o-9qh-omnitrans", available: false },
+
     //{ title: "WMATA", subtitle: "Washington DC", image: "/placeholder.svg", onestop: "o-dqc-met", available: true },
 ]
