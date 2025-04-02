@@ -15,6 +15,7 @@ import * as ct from "@/lib/transit/o-9q9-caltrain.json";
 import * as ttc from "@/lib/transit/o-dpz8-ttc.json";
 import * as foothill from "@/lib/transit/o-9qh1-foothilltransit.json";
 import * as bart from "@/lib/transit/o-9q9-bart.json";
+import * as bayferry from "@/lib/transit/o-9q9p-sanfranciscobayferry.json";
 
 
 import {RoutesResponse} from "@/lib/types/transitland";
@@ -38,7 +39,8 @@ export const agencyMap: Record<string, RoutesResponse> = {
     'o-9q9-caltrain': ct,
     "o-dpz8-ttc": ttc,
     "o-9qh1-foothilltransit": foothill,
-    "o-9q9-bart": bart
+    "o-9q9-bart": bart,
+    "o-9q9p-sanfranciscobayferry": bayferry,
     //'o-dqc-met': dc
 }
 
@@ -65,8 +67,9 @@ export const agencies: AgencyCard[] = [
     { title: "County Connection", subtitle: "Contra Costa County, CA", image: "/placeholder.svg", onestop: "o-9q9p-countyconnection", available: true },
     { title: "Caltrain", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-caltrain", available: true },
     { title: "Toronto Transit Commission", subtitle: "Toronto, ON", image: "/placeholder.svg", onestop: "o-dpz8-ttc", available: true },
-    { title: "Foothill Transit", subtitle: "San Gabriel Valley, CA", image: "/placeholder.svg", onestop: "o-9qh1-foothilltransit", available: true },
-    { title: "BART", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-bart", available: true },
 
+    { title: "Foothill Transit", subtitle: "San Gabriel Valley, CA", image: "/placeholder.svg", onestop: "o-9qh1-foothilltransit", available: false },
+    { title: "BART", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9-bart", available: false },
+    { title: "San Francisco Bay Ferry", subtitle: "San Francisco Bay Area", image: "/placeholder.svg", onestop: "o-9q9p-sanfranciscobayferry", available: false },
     //{ title: "WMATA", subtitle: "Washington DC", image: "/placeholder.svg", onestop: "o-dqc-met", available: true },
 ]
