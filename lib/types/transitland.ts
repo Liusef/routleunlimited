@@ -6,10 +6,10 @@ export interface Meta {
 }
 
 export interface Agency {
-    agency_id: string;
-    agency_name: string;
-    id: number;
-    onestop_id: string;
+    agency_id?: string | null | undefined;
+    agency_name:  string | null | undefined;
+    id?: number;
+    onestop_id:  string | null | undefined;
 }
 
 export interface Feed {

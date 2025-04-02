@@ -19,6 +19,7 @@ import * as bayferry from "@/lib/transit/o-9q9p-sanfranciscobayferry.json";
 import * as sacrt from "@/lib/transit/o-9qce-sacramentoregionaltransit.json";
 import * as omni from "@/lib/transit/o-9qh-omnitrans.json";
 import * as uta from "@/lib/transit/o-9x0-utahtransitauthority.json";
+import * as marta from "@/lib/transit/o-dnh-metropolitanatlantarapidtransitauthority.json";
 
 
 import {RoutesResponse} from "@/lib/types/transitland";
@@ -46,7 +47,8 @@ export const agencyMap: Record<string, RoutesResponse> = {
     "o-9q9p-sanfranciscobayferry": bayferry,
     "o-9qce-sacramentoregionaltransit": sacrt,
     "o-9qh-omnitrans": omni,
-    "o-9x0-utahtransitauthority": uta
+    "o-9x0-utahtransitauthority": uta,
+    "o-dnh-metropolitanatlantarapidtransitauthority": marta
 
     //'o-dqc-met': dc
 }
@@ -81,6 +83,6 @@ export const agencies: AgencyCard[] = [
     { title: "Sacramento Regional Transit", subtitle: "Sacramento, CA", image: "/placeholder.svg", onestop: "o-9qce-sacramentoregionaltransit", available: false },
     { title: "Omnitrans", subtitle: "San Bernardino County, CA", image: "/placeholder.svg", onestop: "o-9qh-omnitrans", available: false },
     { title: "Utah Transit Authority", subtitle: "Salt Lake City, UT", image: "/placeholder.svg", onestop: "o-9x0-utahtransitauthority", available: false },
-
+    { title: "MARTA", subtitle: "Atlanta, GA", image: "/placeholder.svg", onestop: "o-dnh-metropolitanatlantarapidtransitauthority", available: false },
     //{ title: "WMATA", subtitle: "Washington DC", image: "/placeholder.svg", onestop: "o-dqc-met", available: true },
 ]
