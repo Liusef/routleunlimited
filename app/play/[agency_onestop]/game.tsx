@@ -1,5 +1,5 @@
 'use client'
-import { Route} from "@/lib/types/transitland";
+import {Geometry, Route} from "@/lib/types/transitland";
 import dynamic from "next/dynamic";
 import { centerOfMass } from "@turf/center-of-mass";
 import {Suspense, useEffect, useState} from "react";
@@ -60,9 +60,15 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
 
     useEffect(() => {
         // using 'combine' from turf, we can combine the features of the route and the guesses, then get the bounds of that
+
+        // Filter out routes without geometry before combining
+        const validGeometries = guesses
+            .map(guess => routes.find(route => route.onestop_id === guess)?.geometry)
+            .filter((geom): geom is Geometry => geom !== undefined) // Type guard
+
         //eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
-        const combined = combine([routegeojson, ...guesses.map(guess => cleanCoords(routes.find(route => route.onestop_id === guess).geometry))])
+        const combined = combine([routegeojson, ...validGeometries.map(cleanCoords)])
         setBoundbox(bbox(combined))
         //eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-expect-error

@@ -94,7 +94,9 @@ export default function RootLayout({
                                 Routle Unlimited</Link>
                         </div>
                         <div className="flex items-center">
+                            {/*
                             <Profile/>
+                            */}
                         </div>
                     </div>
                 </div>

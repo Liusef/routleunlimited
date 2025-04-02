@@ -135,8 +135,9 @@ export default async function Page({ params }: { params: Promise<{ agency_onesto
     const { agency_onestop } = await params;
     const { env } = getRequestContext();
     const kv = env.routleunlimited as KVNamespace;
-    const { getUser, isAuthenticated } = getKindeServerSession();
+    /*
 
+    const { getUser, isAuthenticated } = getKindeServerSession();
     if (!(await isAuthenticated())) {
         return (
             <div className="flex flex-col items-center justify-center h-screen text-center">
@@ -169,6 +170,7 @@ export default async function Page({ params }: { params: Promise<{ agency_onesto
             </div>
         );
     }
+     */
 
     const json = agencyMap[agency_onestop] as RoutesResponse;
     if (!json) {
