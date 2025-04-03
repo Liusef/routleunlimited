@@ -65,6 +65,7 @@ export const metadata: Metadata = {
         "commuter rail trivia",
         "commuter rail",
     ],
+    appleWebApp: { capable: true, title: title, statusBarStyle: "black-translucent" }
 };
 
 export const viewport: Viewport = {
