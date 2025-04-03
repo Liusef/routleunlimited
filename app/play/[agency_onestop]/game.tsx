@@ -64,7 +64,7 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
         // Filter out routes without geometry before combining
         const validGeometries = guesses
             .map(guess => routes.find(route => route.onestop_id === guess)?.geometry)
-            .filter((geom): geom is Geometry => geom !== undefined) // Type guard
+            .filter((geom): geom is Geometry => geom !== null) // Type guard
 
         //eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
