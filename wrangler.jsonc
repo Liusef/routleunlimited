@@ -4,6 +4,15 @@
   "name": "routleunlimited",
   "compatibility_date": "2024-12-30",
   "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "KINDE_CLIENT_ID": "2d6e741691cf43aea031eac18e20e883",
+    "KINDE_CLIENT_SECRET": "8jRAczNO38C14nddw9dzvuy4BdGaCAxePrDMA05acwQEj9w5kxsW",
+    "KINDE_ISSUER_URL": "https://kinde.idp.quacksire.dev",
+    "KINDE_SITE_URL": "https://routleunlimited.com/",
+    "KINDE_POST_LOGOUT_REDIRECT_URL": "https://routleunlimited.com/",
+    "KINDE_POST_LOGIN_REDIRECT_URL": "https://routleunlimited.com/"
+  },
+
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
@@ -16,12 +25,9 @@
     }
   ],
   "kv_namespaces": [
-
     {
        "binding": "routleunlimited",
        "id": "e166d02cda3f44c69b8e803c3e39d643"
      }
-    // Create a KV binding with the binding name "NEXT_INC_CACHE_KV"
-    // to enable the KV based caching:
   ]
 }
