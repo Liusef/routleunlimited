@@ -296,13 +296,13 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                                     let emojiString = ''
                                     guesses.forEach((guess) => {
                                         if (guess === currentRoute.onestop_id) {
-                                            emojiString += '🟩'
+                                            emojiString += '🟩 '
                                         } else {
-                                            emojiString += '🟥'
+                                            emojiString += '🟥 '
                                         }
                                     })
                                     for (let i = guesses.length; i < 5; i++) {
-                                        emojiString += '⬛'
+                                        emojiString += '⬛ '
                                     }
                                     const text = `${beutifyAgencyName(currentRoute.agency.agency_name)} Routle ${new Date().toLocaleDateString()}\n${emojiString}\n\nhttps://routleunlimited.com/play/${currentRoute.agency.onestop_id}`
                                     try {

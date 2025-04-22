@@ -261,3 +261,18 @@ export function CTALogin({ btnText = `Continue`, arrow = <ChevronRightIcon class
         </LoginLink>
     )
 }
+
+/**
+ * Returns a login URL for the Kinde authentication page.
+ * @param {string} [redirectUrl="/"] - the URL to redirect to after login
+ * @param {string} [org] - the org code to use for the login. Uses the default org in config code if not provided
+ * @param {string} [connection_id] - the connection id to use for the login.
+ * @returns {string}
+ */
+export const getLoginUrl = ( redirectUrl: string = '/', org: string = orgCode, connection_id?: string) => `/api/auth/login?post_login_redirect_url=${redirectUrl}${org ? `&org_code=${org}` : ''}${connection_id ? `&connection_id=${connection_id}` : ''}`
+/**
+ * Returns a logout URL for the Kinde authentication page
+ * @param {string} [redirectUrl="/"] - the URL to redirect to after logout
+ * @returns {string}
+ */
+export const getLogoutUrl = ( redirectUrl: string = '/') => `/api/auth/logout?post_logout_redirect_url=${redirectUrl}`

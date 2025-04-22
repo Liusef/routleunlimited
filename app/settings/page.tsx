@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { useKindeBrowserClient} from "@kinde-oss/kinde-auth-nextjs"
 import { LocateFixed } from "lucide-react"
+import {getLoginUrl} from "@/components/kinde";
 
 export default function Profile() {
     const router = useRouter()
@@ -35,7 +36,7 @@ export default function Profile() {
 
     useEffect(() => {
         if (!isLoading && !isAuthenticated) {
-            router.push("/api/auth/login")
+            router.push(getLoginUrl("/settings"))
         }
         console.log(isLoading, isAuthenticated, user)
         if (user) {
