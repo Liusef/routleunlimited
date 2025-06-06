@@ -16,7 +16,7 @@ import { MapLibreTileLayer } from '@/lib/vectortiles/maplibretilelayer';
 
 const DEFAULT_ZOOM = 12;
 
-const Map = ({ lat, lng, children, showTiles = false, bounds }: { lat: number; lng: number; children?: React.ReactNode, showTiles: boolean, bounds?: never}) => {
+const Map = ({ lat, lng, children, showWater , showTiles = false, bounds }: { lat: number; lng: number; children?: React.ReactNode, showWater: boolean, showTiles: boolean, bounds?: never}) => {
 
 
     //eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -37,10 +37,8 @@ const Map = ({ lat, lng, children, showTiles = false, bounds }: { lat: number; l
 
             {children}
 
-            {
-                // @ts-ignore
-                <MapLibreTileLayer url={showTiles ? fullmap : watermap} />
-            }
+            { /* @ts-ignore */ }
+            {showTiles ? <MapLibreTileLayer url={fullmap}/> : showWater && <MapLibreTileLayer url={watermap}/>}
 
 
         </MapContainer>

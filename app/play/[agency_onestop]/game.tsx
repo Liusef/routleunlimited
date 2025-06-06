@@ -91,7 +91,9 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
     // the bottom 25% will be the guesses
 
 
-
+    // New code to allow users to show an outline of the map to provide 
+    // context on where the route is in the agency's service area
+    const [showWater, setShowWater] = useState(false)
 
 
     return (
@@ -107,7 +109,7 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                     lat={centerOfRoute.geometry.coordinates[1]}
                     lng={centerOfRoute.geometry.coordinates[0]}
                     showTiles={fin}
-
+                    showWater={showWater}
                 >
                     {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
                     {/* @ts-expect-error */}
@@ -239,6 +241,22 @@ export default function Game({currentRoute, routes }: {currentRoute: Route, rout
                 )}
 
 
+                {
+                // This allows the user to show the water on the map to provide context on where they're looking
+                !fin && (
+                    <>
+                        <div className="checkbox-container">
+                            <label className="checkbox-label">
+                                <input
+                                    type="checkbox"
+                                    checked={showWater}
+                                    onChange={(event) => {setShowWater(event.target.checked)}}
+                                    />
+                                Show Land & Water on Map
+                            </label>
+                        </div>
+                    </>
+                )}
 
             </div>
             <Dialog open={modal}>
